@@ -23,6 +23,7 @@ describe('TextfieldComponent', () => {
     formControl = new FormControl("old");
     component.formControl = formControl;
     component.label = "Label"
+
     fixture.detectChanges();
   });
 
@@ -40,6 +41,14 @@ describe('TextfieldComponent', () => {
     const el = fixture.nativeElement
     const label: HTMLLabelElement = el.querySelector("label");
     expect(label.textContent).toContain("Label");
+  });
+
+  it('should set id', () => {
+    component.id = "input-id"
+    fixture.detectChanges();
+    const el = fixture.nativeElement
+    const label = el.querySelector("#input-id");
+    expect(label).not.toBe(null);
   });
 
 });
