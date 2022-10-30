@@ -18,5 +18,6 @@ export class TextfieldComponent implements OnInit {
   @Input() label!: string;
   @Input() control!: FormControl;
   @Input() id = "";
+  @Input() type = "";
 
 }

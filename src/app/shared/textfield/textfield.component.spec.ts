@@ -51,4 +51,12 @@ describe('TextfieldComponent', () => {
     expect(label).not.toBe(null);
   });
 
+  it('should set input type', () => {
+    component.type = "password"
+    fixture.detectChanges();
+    const el = fixture.nativeElement
+    const input = el.querySelector("input[type=password]");
+    expect(input).not.toBe(null);
+  });
+
 });
