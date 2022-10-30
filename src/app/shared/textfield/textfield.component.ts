@@ -16,7 +16,7 @@ export class TextfieldComponent implements OnInit {
   }
   
   @Input() label!: string;
-  @Input() formControl!: FormControl;
+  @Input() control!: FormControl;
   @Input() id = "";
 
 }

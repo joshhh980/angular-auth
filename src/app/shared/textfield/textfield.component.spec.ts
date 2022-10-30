@@ -21,7 +21,7 @@ describe('TextfieldComponent', () => {
     fixture = TestBed.createComponent(TextfieldComponent);
     component = fixture.componentInstance;
     formControl = new FormControl("old");
-    component.formControl = formControl;
+    component.control = formControl;
     component.label = "Label"
 
     fixture.detectChanges();
