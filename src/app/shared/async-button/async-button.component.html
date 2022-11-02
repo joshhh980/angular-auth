@@ -1,0 +1,6 @@
+<button [id]="id" [type]="type">
+    <div role="indicator" *ngIf="isLoading">
+        Loading
+    </div>
+    <ng-content></ng-content>
+</button>
