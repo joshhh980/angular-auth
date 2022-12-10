@@ -1,4 +1,4 @@
-<button [id]="id" [type]="type">
+<button [id]="id" [type]="type" [disabled]="disabled || isLoading">
     <div role="indicator" *ngIf="isLoading">
         Loading
     </div>

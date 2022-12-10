@@ -16,4 +16,5 @@ export class AsyncButtonComponent implements OnInit {
   @Input() labelText = "";
   @Input() type = "";
   @Input() id = "";
+  @Input() disabled = false;
 }

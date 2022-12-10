@@ -14,13 +14,15 @@ const onChangeInput = (root: HTMLElement, name: string, value: string) => {
   const input = root.querySelector(`input[id=${name}]`) as HTMLInputElement;
   input.value = value;
   input.dispatchEvent(new Event("input"));
+  input.dispatchEvent(new Event("blur"));
 }
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
-  let spy: jasmine.Spy;
+  let navSpy: jasmine.Spy;
   let router: Router;
+  let root: HTMLElement;
 
   beforeEach(async () => {
     const httpClientSpy = jasmine.createSpyObj('HttpClient', ['post', 'get']);
@@ -50,25 +52,55 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     router = TestBed.inject(Router);
     httpClientSpy.post.and.returnValue(of({
+      ok: true,
       headers: {
-        get(){
-          return "Bearer some"
+        get() {
+          return "Bearer token"
         }
-      }, data: {}
+      }, 
+      data: {},
     }));
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
-  it('should submit login forms', () => {
-    const navSpy = spyOn(router, "navigate");
+  beforeEach(() => {
+    navSpy = spyOn(router, "navigate");
     localStorage.clear();
-    const root = fixture.nativeElement as HTMLElement;
+    root = fixture.nativeElement as HTMLElement;
+  })
+
+  it('should submit login forms', () => {
     onChangeInput(root, "email", "example@mail.com");
     onChangeInput(root, "password", "12345678");
+    fixture.detectChanges();
     const button = root.querySelector("button[id=login-button]") as HTMLElement;
-    button.click();    
-    expect(localStorage.getItem("token")).toBe("some");
+    button.click();
+    expect(localStorage.getItem("token")).toBe("token");
     expect(navSpy).toHaveBeenCalledWith(["/"]);
   });
+
+
+  describe("invalid", () => {
+
+    it("should show Email is required", () => {
+      onChangeInput(root, "email", "");
+      fixture.detectChanges();
+      const errors = root.querySelector(".errors") as HTMLElement;
+      expect(errors.textContent).toContain("Email is required");
+      const button = root.querySelector("button[id=login-button]") as HTMLElement;
+      expect(button.getAttribute('disabled')).toEqual('');
+    })
+
+    it("should show Password is required", () => {
+      onChangeInput(root, "password", "");
+      fixture.detectChanges();
+      const errors = root.querySelector(".errors") as HTMLElement;
+      expect(errors.textContent).toContain("Password is required");
+      const button = root.querySelector("button[id=login-button]") as HTMLElement;
+      expect(button.getAttribute('disabled')).toEqual('');
+    })
+
+  })
+
 });

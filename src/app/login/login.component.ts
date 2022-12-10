@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../shared/api.service';
 
@@ -13,22 +13,18 @@ export class LoginComponent implements OnInit {
   constructor(public api: ApiService, public router: Router) {
   }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   formGroup = new FormGroup({
-    email: new FormControl(""),
-    password: new FormControl(""),
+    email: new FormControl("", Validators.required),
+    password: new FormControl("", Validators.required),
   });
 
   isLoading = false;
 
-  data = {}
-
   handleSubmit() {
     this.isLoading = true;
-    this.api.login().subscribe((data) => {
-      this.data = data
+    this.api.login().subscribe((data) => {      
       if (data.ok) {
         const auth = data.headers.get("Authorization");
         if (!auth) return;
@@ -39,9 +35,9 @@ export class LoginComponent implements OnInit {
     })
   }
 
-  onSubmit(): boolean {
-    this.handleSubmit()
-    return false
+  onSubmit() {    
+    if (this.formGroup.invalid) return;
+    this.handleSubmit();
   }
 
 
