@@ -10,6 +10,7 @@ import { FormControlPipePipe } from './form-control-pipe.pipe';
 import { PasswordfieldComponent } from './shared/passwordfield/passwordfield.component';
 import { AsyncButtonComponent } from './shared/async-button/async-button.component';
 import { HttpClientModule } from '@angular/common/http';
+import { PopUpComponent } from './shared/pop-up/pop-up.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { HttpClientModule } from '@angular/common/http';
     LoginComponent,
     FormControlPipePipe,
     PasswordfieldComponent,
-    AsyncButtonComponent
+    AsyncButtonComponent,
+    PopUpComponent
   ],
   imports: [
     BrowserModule,
