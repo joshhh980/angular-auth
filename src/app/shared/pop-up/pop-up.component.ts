@@ -14,7 +14,14 @@ export class PopUpComponent implements OnInit {
 
 
   ngOnInit(): void {
-    this.popUpService.currentMessage.subscribe(msg => this.message = msg);
+    this.popUpService.currentMessage.subscribe(msg => {
+      this.message = msg;
+      if(msg){
+        setTimeout(() => {
+          this.popUpService.updateCurrentMessage("");
+        }, 3000)
+      }
+    });
   }
 
 }

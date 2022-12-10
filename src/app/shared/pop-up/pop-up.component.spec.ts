@@ -1,4 +1,4 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
 
 import { PopUpComponent } from './pop-up.component';
 
@@ -28,5 +28,17 @@ describe('PopUpComponent', () => {
     popUp = root.querySelector("#pop-up");
     expect(popUp).toBeNull();
   });
+
+  fit('should hide after 3s', fakeAsync(() => {
+    component.popUpService.updateCurrentMessage("Pop up");
+    fixture.detectChanges();
+    const root = fixture.nativeElement as HTMLElement;
+    let popUp = root.querySelector("#pop-up");
+    expect(popUp).not.toBeNull();
+    tick(30001)
+    fixture.detectChanges();
+    popUp = root.querySelector("#pop-up");
+    expect(popUp).toBeNull()
+  }));
 
 });
