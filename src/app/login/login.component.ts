@@ -25,20 +25,22 @@ export class LoginComponent implements OnInit {
 
   data = {}
 
-  handleSubmit(cred: Partial<{ email: string | null; password: string | null; }>){
+  handleSubmit() {
     this.isLoading = true;
     this.api.login().subscribe((data) => {
       this.data = data
-      const auth = data.headers.get("Authorization");
-      if(!auth) return;
-      const token = auth.replace("Bearer ", "");
-      localStorage.setItem("token", token);
-      this.router.navigate(["/"])
+      if (data.ok) {
+        const auth = data.headers.get("Authorization");
+        if (!auth) return;
+        const token = auth.replace("Bearer ", "");
+        localStorage.setItem("token", token);
+        this.router.navigate(["/"])
+      }
     })
   }
 
-  onSubmit(): boolean {    
-    this.handleSubmit(this.formGroup.value)
+  onSubmit(): boolean {
+    this.handleSubmit()
     return false
   }
 
