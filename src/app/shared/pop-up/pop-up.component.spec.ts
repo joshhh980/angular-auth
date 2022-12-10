@@ -17,7 +17,7 @@ describe('PopUpComponent', () => {
     fixture.detectChanges();
   });
 
-  fit('toggles pop-up when message is set', () => {
+  it('toggles pop-up when message is set', () => {
     component.popUpService.updateCurrentMessage("Pop up");
     fixture.detectChanges();
     const root = fixture.nativeElement as HTMLElement;

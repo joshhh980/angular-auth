@@ -1,7 +1,10 @@
+import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ApiService } from '../shared/api.service';
+import { PopUpService } from '../shared/pop-up/pop-up.service';
+import { User } from '../shared/user';
 
 @Component({
   selector: 'app-login',
@@ -10,10 +13,10 @@ import { ApiService } from '../shared/api.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public api: ApiService, public router: Router) {
+  constructor(public apiService: ApiService, public router: Router, public popUpService: PopUpService) {
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   formGroup = new FormGroup({
     email: new FormControl("", Validators.required),
@@ -24,18 +27,32 @@ export class LoginComponent implements OnInit {
 
   handleSubmit() {
     this.isLoading = true;
-    this.api.login().subscribe((data) => {      
-      if (data.ok) {
-        const auth = data.headers.get("Authorization");
-        if (!auth) return;
-        const token = auth.replace("Bearer ", "");
-        localStorage.setItem("token", token);
-        this.router.navigate(["/"])
-      }
-    })
+
+    this.apiService
+      .login()
+      .subscribe({
+        next: (data: HttpResponse<User>) => {
+          if (data.ok) {
+            const auth = data.headers.get("Authorization");
+            if (!auth) return;
+            const token = auth.replace("Bearer ", "");
+            localStorage.setItem("token", token);
+            this.isLoading = false
+            this.router.navigate(["/"])
+          }
+        },
+        error: (e: HttpErrorResponse) => {
+          if (e.status == 401) {
+            this.popUpService.updateCurrentMessage(e.error.errors[0]);
+          }else{
+            this.popUpService.updateCurrentMessage("An unknown error occured");
+          }
+          this.isLoading = false
+        },
+      })
   }
 
-  onSubmit() {    
+  onSubmit() {
     if (this.formGroup.invalid) return;
     this.handleSubmit();
   }

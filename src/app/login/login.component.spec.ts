@@ -1,12 +1,11 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
-import { of } from 'rxjs';
 import { FormControlPipePipe } from '../form-control-pipe.pipe';
 import { AsyncButtonComponent } from '../shared/async-button/async-button.component';
 import { PasswordfieldComponent } from '../shared/passwordfield/passwordfield.component';
 import { TextfieldComponent } from '../shared/textfield/textfield.component';
+import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 
 import { LoginComponent } from './login.component';
 
@@ -23,9 +22,10 @@ describe('LoginComponent', () => {
   let navSpy: jasmine.Spy;
   let router: Router;
   let root: HTMLElement;
+  let httpTestingController: HttpTestingController;
+  let req: TestRequest;
 
   beforeEach(async () => {
-    const httpClientSpy = jasmine.createSpyObj('HttpClient', ['post', 'get']);
 
     await TestBed.configureTestingModule({
       declarations: [
@@ -38,28 +38,15 @@ describe('LoginComponent', () => {
       imports: [
         ReactiveFormsModule,
         FormsModule,
-        HttpClientModule,
+        HttpClientTestingModule,
       ],
-      providers: [
-        {
-          provide: HttpClient,
-          useValue: httpClientSpy
-        },
-      ]
+      providers: []
     })
       .compileComponents();
 
     fixture = TestBed.createComponent(LoginComponent);
     router = TestBed.inject(Router);
-    httpClientSpy.post.and.returnValue(of({
-      ok: true,
-      headers: {
-        get() {
-          return "Bearer token"
-        }
-      }, 
-      data: {},
-    }));
+    httpTestingController = TestBed.get(HttpTestingController);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -70,15 +57,70 @@ describe('LoginComponent', () => {
     root = fixture.nativeElement as HTMLElement;
   })
 
-  it('should submit login forms', () => {
-    onChangeInput(root, "email", "example@mail.com");
-    onChangeInput(root, "password", "12345678");
-    fixture.detectChanges();
-    const button = root.querySelector("button[id=login-button]") as HTMLElement;
-    button.click();
-    expect(localStorage.getItem("token")).toBe("token");
-    expect(navSpy).toHaveBeenCalledWith(["/"]);
-  });
+  describe("valid", () => {
+
+
+    beforeEach(() => {
+      component.popUpService.updateCurrentMessage = jasmine.createSpy();
+      onChangeInput(root, "email", "example@mail.com");
+      onChangeInput(root, "password", "12345678");
+      fixture.detectChanges();
+      const button = root.querySelector("button[id=login-button]") as HTMLElement;
+      button.click();
+      req = httpTestingController.expectOne("http://localhost:3000/api/login")
+    })
+
+    afterEach(() => {
+      httpTestingController.verify();
+    })
+
+    it('should submit login forms', () => {
+      req.flush(
+        {
+        },
+        {
+          headers: {
+            "Authorization": "Bearer token",
+          }
+        }
+      )
+      expect(localStorage.getItem("token")).toBe("token");
+      expect(navSpy).toHaveBeenCalledWith(["/"]);
+    });
+
+    it("should update pop-up message when status == 401", () => {
+      req.flush(
+        {
+          errors: [
+            "Invalid Email or Password"
+          ]
+        },
+        {
+          status: 401,
+          statusText: "401",
+        }
+      )
+      fixture.detectChanges();
+      expect(localStorage.getItem("token")).not.toBe("token");
+      expect(navSpy).not.toHaveBeenCalledWith(["/"]);
+      expect(component.popUpService.updateCurrentMessage).toHaveBeenCalledOnceWith("Invalid Email or Password");
+    })
+
+    it("should update pop-up message when status == 500", () => {
+      req.flush(
+        {
+        },
+        {
+          status: 500,
+          statusText: "500",
+        }
+      )
+      fixture.detectChanges();
+      expect(localStorage.getItem("token")).not.toBe("token");
+      expect(navSpy).not.toHaveBeenCalledWith(["/"]);
+      expect(component.popUpService.updateCurrentMessage).toHaveBeenCalledOnceWith("An unknown error occured");
+    });
+  })
 
 
   describe("invalid", () => {
