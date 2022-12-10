@@ -14,9 +14,9 @@ export class ApiService {
 
   constructor(private http: HttpClient) {}
 
-  login(): Observable<any> {    
+  login(values: { email: string, password: string }): Observable<any> {    
     return this.http
-      .post<User>(`${this.apiHost}/login`, {}, { observe: "response" })
+      .post<User>(`${this.apiHost}/login`, values, { observe: "response" })
   }
 
 }

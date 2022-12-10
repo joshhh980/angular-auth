@@ -27,14 +27,16 @@ export class LoginComponent implements OnInit {
 
   handleSubmit() {
     this.isLoading = true;
-
+    let _formGroup = this.formGroup;
     this.apiService
-      .login()
+      .login({
+        email: _formGroup.get("email")!.value!,
+        password: _formGroup.get("password")!.value!,
+      })
       .subscribe({
         next: (data: HttpResponse<User>) => {
           if (data.ok) {
-            const auth = data.headers.get("Authorization");
-            if (!auth) return;
+            const auth = data.headers.get("Authorization")!;
             const token = auth.replace("Bearer ", "");
             localStorage.setItem("token", token);
             this.isLoading = false

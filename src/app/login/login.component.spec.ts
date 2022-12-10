@@ -67,7 +67,11 @@ describe('LoginComponent', () => {
       fixture.detectChanges();
       const button = root.querySelector("button[id=login-button]") as HTMLElement;
       button.click();
-      req = httpTestingController.expectOne("http://localhost:3000/api/login")
+      req = httpTestingController.expectOne(`${component.apiService.apiHost}/login`)
+      expect(req.request.body).toEqual({
+        email: "example@mail.com",
+        password: "12345678",
+      })
     })
 
     afterEach(() => {
