@@ -66,7 +66,7 @@ describe('LoginComponent', () => {
     const root = fixture.nativeElement as HTMLElement;
     onChangeInput(root, "email", "example@mail.com");
     onChangeInput(root, "password", "12345678");
-    const button = root.querySelector("button[id=button]") as HTMLElement;
+    const button = root.querySelector("button[id=login-button]") as HTMLElement;
     button.click();    
     expect(localStorage.getItem("token")).toBe("some");
     expect(navSpy).toHaveBeenCalledWith(["/"]);

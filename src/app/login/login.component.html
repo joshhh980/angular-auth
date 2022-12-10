@@ -1,5 +1,5 @@
 <form [formGroup]="formGroup" (submit)="onSubmit()">
     <app-textfield id="email" type="email" label="Email" [control]="formGroup.get('email')! | formControlPipe"></app-textfield>
     <app-passwordfield id="password" label="Password" [control]="formGroup.get('password')! | formControlPipe"></app-passwordfield>
-    <app-async-button id="button" type="submit" [isLoading]="isLoading">Login</app-async-button>
+    <app-async-button id="login-button" type="submit" [isLoading]="isLoading">Login</app-async-button>
 </form>
