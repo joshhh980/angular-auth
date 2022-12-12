@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+:root{
+    --primary: #38ae38;
+    
+    --error: #fc3b3b;
+
+    --text-size-sm: 15px;
+    --text-size: 18px;
+    --text-primary: #000;
+
+    --margin: 20px;
+    --margin-sm: 5px;
+
+    --padding: 10px;
+
+    --border-radius: 5px;
+
+    --font-family: sans-serif;
+
+    --textfield-border-primary: var(--primary);
+    --textfield-border-error: var(--error);
+    --textfield-border-inactive: #bbb;
+
+    --textfield-border-radius: var(--border-radius);
+    
+    --textfield-margin: var(--margin-sm);
+    
+    --textfield-padding: var(--padding);
+
+    --textfield-outer-margin: var(--margin);
+    
+    --textfield-text-error-color: var(--textfield-border-error);
+    --textfield-text-error-size: var(--text-size-sm);
+    
+    --textfield-label-color: var(--text-primary);
+    --textfield-label-size: var(--text-size);
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-family);
+    font-size: var(--text-size);
+}

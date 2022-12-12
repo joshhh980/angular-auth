@@ -20,4 +20,13 @@ export class TextfieldComponent implements OnInit {
   @Input() id = "";
   @Input() type = "";
 
+  isInvalid(){
+    let control = this.control; 
+    return control.invalid && control.touched
+  }
+
+  isRequired(){
+    return this.control.errors?.['required']
+  }
+
 }

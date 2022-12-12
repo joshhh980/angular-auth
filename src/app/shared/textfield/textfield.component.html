@@ -1,7 +1,20 @@
-<div>
-    <label [for]="id">{{ label }}</label>
-    <input [id]="id" [type]="type" [formControl]="control">
-    <span *ngIf="control.invalid && control.touched" class="errors">
-        {{ control.errors?.['required'] ? label + ' is required' : '' }}
+<div class="textfield">
+    <label 
+        [for]="id"
+    >
+        {{ label }}  
+        {{ isRequired() ? '*' : '' }}
+    </label>
+    <input 
+        [id]="id" 
+        [type]="type" 
+        [formControl]="control" 
+        [class]="isInvalid() ? 'error' : ''"
+    >
+    <span 
+        *ngIf="isInvalid()" 
+        class="errors"
+    >
+        {{ isRequired() ? label + ' is required' : '' }}
     </span>
 </div>

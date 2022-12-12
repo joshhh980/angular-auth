@@ -1,0 +1,35 @@
+.textfield{
+    margin: var(--textfield-outer-margin) 0;
+}
+
+label{
+    font-size: var(--textfield-label-size);
+    color: var(--textfield-label-color);
+}
+
+label,
+input{
+    display: block;
+}
+
+input{
+    margin: var(--textfield-margin) 0;
+    padding: var(--textfield-padding);
+    border-radius: var(--textfield-border-radius);
+    outline: none;
+    border: solid thin var(--textfield-border-inactive);
+    width: 100%;
+    
+    &:focus{
+        border: solid thin var(--textfield-border-primary);
+    }
+
+    &.error{
+        border: solid thin var(--textfield-border-error);
+    }
+}
+
+.errors{
+    font-size: var(--textfield-text-error-size);
+    color: var(--textfield-text-error-color);
+}
