@@ -34,6 +34,14 @@
     
     --textfield-label-color: var(--text-primary);
     --textfield-label-size: var(--text-size);
+
+    --button-padding: var(--padding);
+    --button-primary: var(--primary);
+    --button-border-radius: var(--border-radius);
+    --button-inactive-color: #8cb68c;
+    --button-text-size: var(--text-size);
+    --button-primary-active-color: #088808;
+    --button-text-color: #fff;
 }
 
 * {

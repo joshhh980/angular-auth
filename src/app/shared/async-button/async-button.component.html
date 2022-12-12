@@ -1,6 +1,15 @@
-<button [id]="id" [type]="type" [disabled]="disabled || isLoading">
-    <div role="indicator" *ngIf="isLoading">
-        Loading
+<button 
+    [id]="id" 
+    [type]="type" 
+    [disabled]="disabled || isLoading"
+>
+    <div 
+        role="indicator" 
+        class="loader" 
+        *ngIf="isLoading"
+    >
     </div>
-    <ng-content></ng-content>
+    <span>
+        <ng-content></ng-content>
+    </span>
 </button>
