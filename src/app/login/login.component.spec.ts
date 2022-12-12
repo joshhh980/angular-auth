@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { FormControlPipePipe } from '../form-control-pipe.pipe';
-import { AsyncButtonComponent } from '../shared/async-button/async-button.component';
+import { AsyncButtonComponent } from '../shared/button/button.component';
 import { PasswordfieldComponent } from '../shared/passwordfield/passwordfield.component';
 import { TextfieldComponent } from '../shared/textfield/textfield.component';
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';

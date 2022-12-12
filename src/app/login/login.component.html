@@ -10,8 +10,8 @@
         </app-textfield>
         <app-passwordfield id="password" label="Password" [control]="formGroup.get('password')! | formControlPipe">
         </app-passwordfield>
-        <app-async-button id="login-button" type="submit" [isLoading]="isLoading" [disabled]="formGroup.invalid">
+        <app-button id="login-button" type="submit" [isLoading]="isLoading" [disabled]="formGroup.invalid">
             Login
-        </app-async-button>
+        </app-button>
     </form>
 </app-page>

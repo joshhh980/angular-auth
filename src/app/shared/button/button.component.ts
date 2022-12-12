@@ -1,11 +1,11 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-async-button',
-  templateUrl: './async-button.component.html',
-  styleUrls: ['./async-button.component.scss']
+  selector: 'app-button',
+  templateUrl: './button.component.html',
+  styleUrls: ['./button.component.scss']
 })
-export class AsyncButtonComponent implements OnInit {
+export class ButtonComponent implements OnInit {
 
   constructor() { }
 
