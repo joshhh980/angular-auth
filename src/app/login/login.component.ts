@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiService } from '../shared/api.service';
+import { ApiService } from '../services/api.service';
 import { PopUpService } from '../shared/pop-up/pop-up.service';
 import { User } from '../shared/user';
 
