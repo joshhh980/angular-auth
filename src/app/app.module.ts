@@ -11,6 +11,7 @@ import { PasswordfieldComponent } from './shared/passwordfield/passwordfield.com
 import { AsyncButtonComponent } from './shared/async-button/async-button.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PopUpComponent } from './shared/pop-up/pop-up.component';
+import { PageComponent } from './shared/page/page.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { PopUpComponent } from './shared/pop-up/pop-up.component';
     FormControlPipePipe,
     PasswordfieldComponent,
     AsyncButtonComponent,
-    PopUpComponent
+    PopUpComponent,
+    PageComponent
   ],
   imports: [
     BrowserModule,

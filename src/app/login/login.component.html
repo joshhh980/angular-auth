@@ -1,5 +1,17 @@
-<form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-    <app-textfield id="email" type="email" label="Email" [control]="formGroup.get('email')! | formControlPipe"></app-textfield>
-    <app-passwordfield id="password" label="Password" [control]="formGroup.get('password')! | formControlPipe"></app-passwordfield>
-    <app-async-button id="login-button" type="submit" [isLoading]="isLoading" [disabled]="formGroup.invalid">Login</app-async-button>
-</form>
+<app-page>
+    <div
+        class="login-header"
+    >
+        <h1>Welcome back</h1>
+        <p>Welcome back! Please enter your details</p>
+    </div>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <app-textfield id="email" type="email" label="Email" [control]="formGroup.get('email')! | formControlPipe">
+        </app-textfield>
+        <app-passwordfield id="password" label="Password" [control]="formGroup.get('password')! | formControlPipe">
+        </app-passwordfield>
+        <app-async-button id="login-button" type="submit" [isLoading]="isLoading" [disabled]="formGroup.invalid">
+            Login
+        </app-async-button>
+    </form>
+</app-page>
