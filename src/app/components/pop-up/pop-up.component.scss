@@ -1,0 +1,30 @@
+@import "../../../variables";
+
+#pop-up {
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    right: 10px;
+    background-color: var(--error);
+    padding: var(--padding);
+    color: var(--text-white);
+    border-radius: var(--border-radius);
+}
+
+@media screen and (min-width: $breakpoint-m) {
+
+    //For Laptops
+    #pop-up {
+        right: 20%;
+        left: 20%;
+    }
+}
+
+@media screen and (min-width: $breakpoint-lg) {
+
+    //For HD Laptops 
+    #pop-up {
+        right: 30%;
+        left: 30%;
+    }
+}
