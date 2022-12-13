@@ -6,7 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { TextfieldComponent } from './components/textfield/textfield.component';
 import { LoginComponent } from './views/login/login.component';
-import { FormControlPipePipe } from './form-control-pipe.pipe';
+import { FormControlPipePipe } from './pipes/form-control-pipe.pipe';
 import { PasswordfieldComponent } from './components/passwordfield/passwordfield.component';
 import { ButtonComponent } from './components/button/button.component';
 import { HttpClientModule } from '@angular/common/http';
