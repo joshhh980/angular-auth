@@ -29,7 +29,7 @@ describe('PopUpComponent', () => {
     expect(popUp).toBeNull();
   });
 
-  fit('should hide after 3s', fakeAsync(() => {
+  it('should hide after 3s', fakeAsync(() => {
     component.popUpService.updateCurrentMessage("Pop up");
     fixture.detectChanges();
     const root = fixture.nativeElement as HTMLElement;
