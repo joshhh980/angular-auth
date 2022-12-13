@@ -6,9 +6,9 @@
         <p>Welcome back! Please enter your details</p>
     </div>
     <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
-        <app-textfield id="email" type="email" label="Email" [control]="formGroup.get('email')! | formControlPipe">
+        <app-textfield id="email" type="email" label="Email" [control]="formGroup.get('email')! | formControl">
         </app-textfield>
-        <app-passwordfield id="password" label="Password" [control]="formGroup.get('password')! | formControlPipe">
+        <app-passwordfield id="password" label="Password" [control]="formGroup.get('password')! | formControl">
         </app-passwordfield>
         <app-button id="login-button" type="submit" [isLoading]="isLoading" [disabled]="formGroup.invalid">
             Login
