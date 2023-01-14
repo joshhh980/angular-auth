@@ -8,6 +8,7 @@ import { TextfieldComponent } from '../../components/textfield/textfield.compone
 import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@angular/common/http/testing';
 
 import { LoginComponent } from './login.component';
+import host from 'src/app/host';
 
 const onChangeInput = (root: HTMLElement, name: string, value: string) => {
   const input = root.querySelector(`input[id=${name}]`) as HTMLInputElement;
@@ -67,7 +68,7 @@ describe('LoginComponent', () => {
       fixture.detectChanges();
       const button = root.querySelector("button[id=login-button]") as HTMLElement;
       button.click();
-      req = httpTestingController.expectOne(`${component.apiService.apiHost}/login`)
+      req = httpTestingController.expectOne(`${host}/login`)
       expect(req.request.body).toEqual({
         email: "example@mail.com",
         password: "12345678",

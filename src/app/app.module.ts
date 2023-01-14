@@ -12,6 +12,7 @@ import { ButtonComponent } from './components/button/button.component';
 import { HttpClientModule } from '@angular/common/http';
 import { PopUpComponent } from './components/pop-up/pop-up.component';
 import { PageComponent } from './components/page/page.component';
+import { HomeComponent } from './views/home/home.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PageComponent } from './components/page/page.component';
     PasswordfieldComponent,
     ButtonComponent,
     PopUpComponent,
-    PageComponent
+    PageComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,
