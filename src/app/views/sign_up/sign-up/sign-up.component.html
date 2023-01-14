@@ -1,1 +1,21 @@
-<p>sign-up works!</p>
+<app-page>
+    <div
+        class="login-header"
+    >
+        <h1>Welcome</h1>
+        <p>Welcome! Create an account to continue</p>
+    </div>
+    <form [formGroup]="formGroup" (ngSubmit)="onSubmit()">
+        <app-textfield id="name" label="Name" [control]="formGroup.get('name')! | formControl">
+        </app-textfield>
+        <app-textfield id="email" type="email" label="Email" [control]="formGroup.get('email')! | formControl">
+        </app-textfield>
+        <app-passwordfield id="password" label="Password" [control]="formGroup.get('password')! | formControl">
+        </app-passwordfield>
+        <app-passwordfield id="c_password" label="Confirm Password" [control]="formGroup.get('c_password')! | formControl">
+        </app-passwordfield>
+        <app-button id="sign-up-button" type="submit" [isLoading]="isLoading" [disabled]="formGroup.invalid">
+            Sign up
+        </app-button>
+    </form>
+</app-page>

@@ -9,13 +9,8 @@ import { HttpClientTestingModule, HttpTestingController, TestRequest } from '@an
 
 import { LoginComponent } from './login.component';
 import host from 'src/app/host';
+import { onChangeInput } from 'src/app/test_helper';
 
-const onChangeInput = (root: HTMLElement, name: string, value: string) => {
-  const input = root.querySelector(`input[id=${name}]`) as HTMLInputElement;
-  input.value = value;
-  input.dispatchEvent(new Event("input"));
-  input.dispatchEvent(new Event("blur"));
-}
 
 describe('LoginComponent', () => {
   let component: LoginComponent;

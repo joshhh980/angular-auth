@@ -12,15 +12,15 @@ export class HomeComponent implements OnInit {
 
   currentUser?: User
 
-  onDeleteUser(){    
-    this.userService.deleteUser()
-      .subscribe()
-  }
-
   constructor(private authService: AuthService, private userService: UserService) {
     authService.currentUser.subscribe(user => {
       this.currentUser = user!
     })
+  }
+
+  onDeleteUser(){    
+    this.userService.deleteUser()
+      .subscribe()
   }
 
   ngOnInit(): void {

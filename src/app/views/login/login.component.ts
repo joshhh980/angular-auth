@@ -2,7 +2,7 @@ import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { ApiService } from '../../services/api.service';
+import { SessionService } from '../../services/session/session.service';
 import { PopUpService } from '../../components/pop-up/pop-up.service';
 import { User } from '../../models/user';
 
@@ -13,7 +13,7 @@ import { User } from '../../models/user';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(public apiService: ApiService, public router: Router, public popUpService: PopUpService) {
+  constructor(public sessionService: SessionService, public router: Router, public popUpService: PopUpService) {
   }
 
   ngOnInit(): void { }
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
   handleSubmit() {
     this.isLoading = true;
     let _formGroup = this.formGroup;
-    this.apiService
+    this.sessionService
       .login({
         email: _formGroup.get("email")!.value!,
         password: _formGroup.get("password")!.value!,
