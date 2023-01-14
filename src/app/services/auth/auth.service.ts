@@ -16,7 +16,7 @@ export class AuthService {
 
   currentUser = this.user.asObservable()
 
-  updateCurrentUser(value: User) {
+  updateCurrentUser(value: User | null) {
     this.user.next(value)
   }
 

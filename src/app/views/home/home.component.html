@@ -1,7 +1,7 @@
 <app-page>
     <p>{{ currentUser?.name }}</p>
     <p>{{ currentUser?.email }}</p>
-    <app-button>
+    <app-button id="delete-user-button" (click)="onDeleteUser()">
         Delete Account
     </app-button>
 </app-page>

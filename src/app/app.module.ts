@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { PopUpComponent } from './components/pop-up/pop-up.component';
 import { PageComponent } from './components/page/page.component';
 import { HomeComponent } from './views/home/home.component';
+import { SignUpComponent } from './views/sign_up/sign-up/sign-up.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { HomeComponent } from './views/home/home.component';
     ButtonComponent,
     PopUpComponent,
     PageComponent,
-    HomeComponent
+    HomeComponent,
+    SignUpComponent
   ],
   imports: [
     BrowserModule,
